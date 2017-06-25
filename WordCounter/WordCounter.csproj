@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7FB1806B-69C3-487E-8058-E2D99BE41AEA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WordCounter</RootNamespace>
+    <AssemblyName>WordCounter</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;version1</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implementations\Processor\PunctuationTextProcessor.cs" />
+    <Compile Include="Implementations\Processor\SpaceTextProcessor.cs" />
+    <Compile Include="Implementations\ResultWriter\ConsoleResultWriter.cs" />
+    <Compile Include="Implementations\Source\TextFileSource.cs" />
+    <Compile Include="Implementations\ResultWriter\TextFileResultWriter.cs" />
+    <Compile Include="Implementations\Worker\SimpleWorker.cs" />
+    <Compile Include="Infrastructure\ConsoleSpiner.cs" />
+    <Compile Include="Infrastructure\ModulesConfiguration.cs" />
+    <Compile Include="Infrastructure\Ninject\Modules\PunctuationTextProcessorModule.cs" />
+    <Compile Include="Infrastructure\Ninject\Modules\ResultWriterModule.cs" />
+    <Compile Include="Infrastructure\Ninject\Modules\TextSourceModule.cs" />
+    <Compile Include="Infrastructure\Ninject\Modules\SpaceTextProcessor.cs" />
+    <Compile Include="Infrastructure\Ninject\Modules\TextFileResultWriterModule.cs" />
+    <Compile Include="Infrastructure\Ninject\Modules\AutoBindModule.cs" />
+    <Compile Include="Infrastructure\Ninject\Modules\TextProcessorModule.cs" />
+    <Compile Include="Infrastructure\Result.cs" />
+    <Compile Include="Infrastructure\TextProcessingResult.cs" />
+    <Compile Include="Infrastructure\Ninject\Modules\TextFileSourceModule.cs" />
+    <Compile Include="Interfaces\INamedType.cs" />
+    <Compile Include="Interfaces\IResultWriter.cs" />
+    <Compile Include="Interfaces\Ninject\IResultWriterModule.cs" />
+    <Compile Include="Interfaces\Ninject\ISourceModule.cs" />
+    <Compile Include="Interfaces\ITextProcessor.cs" />
+    <Compile Include="Interfaces\ITextSource.cs" />
+    <Compile Include="Interfaces\Ninject\ITextProcessorModule.cs" />
+    <Compile Include="Interfaces\IWorker.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DB\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\FileSource.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
